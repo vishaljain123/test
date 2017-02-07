@@ -1,4 +1,4 @@
-var HTTPS_PORT = 8443;
+var HTTPS_PORT = 8223;
 
 var fs = require('fs');
 var https = require('https');
@@ -26,9 +26,17 @@ var handleRequest = function(request, response) {
     }
 };
 
+
 var httpsServer = https.createServer(serverConfig, handleRequest);
 httpsServer.listen(HTTPS_PORT, '0.0.0.0');
+/**
 
+    Data flow will be alike the data sync steps:-
+
+    1. data will be synced accordin to the peer server.
+    
+*/
+//data clothing here taking place....
 // ----------------------------------------------------------------------------------------
 
 // Create a server for handling websocket calls
@@ -40,6 +48,7 @@ wss.on('connection', function(ws) {
         console.log('received: %s', message);
         wss.broadcast(message);
     });
+
 });
 
 wss.broadcast = function(data) {
